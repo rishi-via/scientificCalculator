@@ -200,20 +200,20 @@ function App() {
   const controlButtons = [
     { label: 'C', variant: 'danger', action: clearAll },
     { label: <Delete className="mx-auto h-5 w-5" />, ariaLabel: 'Delete', variant: 'function', action: deleteDigit },
+    { label: 'π', variant: 'function', action: () => setConstant(Math.PI) },
     { label: '÷', variant: 'operator', action: () => selectOperator('/') },
     { label: '×', variant: 'operator', action: () => selectOperator('*') },
     { label: '7', variant: 'number', action: () => inputDigit('7') },
     { label: '8', variant: 'number', action: () => inputDigit('8') },
     { label: '9', variant: 'number', action: () => inputDigit('9') },
-    { label: '-', variant: 'operator', action: () => selectOperator('-') },
-    { label: '+', variant: 'operator', action: () => selectOperator('+') },
     { label: '4', variant: 'number', action: () => inputDigit('4') },
     { label: '5', variant: 'number', action: () => inputDigit('5') },
     { label: '6', variant: 'number', action: () => inputDigit('6') },
-    { label: 'π', variant: 'function', action: () => setConstant(Math.PI) },
+    { label: '-', variant: 'operator', action: () => selectOperator('-') },
     { label: '1', variant: 'number', action: () => inputDigit('1') },
     { label: '2', variant: 'number', action: () => inputDigit('2') },
     { label: '3', variant: 'number', action: () => inputDigit('3') },
+    { label: '+', variant: 'operator', action: () => selectOperator('+') },
     { label: '.', variant: 'number', action: inputDecimal },
     {
       label: <Equal className="mx-auto h-5 w-5" />,
@@ -259,7 +259,7 @@ function App() {
         </section>
 
         <section className="space-y-1.5">
-          <div className="grid grid-cols-5 gap-1.5">
+          <div className="grid grid-cols-4 gap-1.5">
             {controlButtons.map((button, index) => (
               <CalcButton
                 key={`${index}-${button.ariaLabel || button.label}`}
