@@ -9,7 +9,7 @@ function CalcButton({ label, onClick, variant = 'number', className = '', ariaLa
       onClick={onClick}
       aria-label={ariaLabel || label}
       className={clsx(
-        'min-h-[44px] min-w-[44px] rounded-xl px-2 text-base font-semibold shadow-sm transition-all duration-200 active:brightness-95',
+        'min-h-[48px] min-w-[44px] rounded-2xl px-3 text-base font-semibold shadow-sm transition-all duration-200 active:brightness-95',
         variant === 'number' && 'bg-white text-panel-900',
         variant === 'operator' && 'bg-calc-500 text-white',
         variant === 'function' && 'bg-calc-100 text-calc-800',
