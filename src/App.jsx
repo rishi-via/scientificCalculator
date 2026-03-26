@@ -84,17 +84,6 @@ function App() {
     }
   };
 
-  const inputDoubleZero = () => {
-    if (display === 'Error' || awaitingNextValue) {
-      setDisplay('0');
-      setAwaitingNextValue(false);
-      return;
-    }
-    if (display !== '0') {
-      setDisplay((prev) => `${prev}00`);
-    }
-  };
-
   const clearAll = () => {
     setDisplay('0');
     setStoredValue(null);
@@ -211,7 +200,6 @@ function App() {
   const controlButtons = [
     { label: 'C', variant: 'danger', action: clearAll },
     { label: <Delete className="mx-auto h-5 w-5" />, ariaLabel: 'Delete', variant: 'function', action: deleteDigit },
-    { label: '%', variant: 'function', action: () => applyUnary((v) => v / 100) },
     { label: '÷', variant: 'operator', action: () => selectOperator('/') },
     { label: '×', variant: 'operator', action: () => selectOperator('*') },
     { label: '7', variant: 'number', action: () => inputDigit('7') },
@@ -223,7 +211,6 @@ function App() {
     { label: '5', variant: 'number', action: () => inputDigit('5') },
     { label: '6', variant: 'number', action: () => inputDigit('6') },
     { label: 'π', variant: 'function', action: () => setConstant(Math.PI) },
-    { label: 'e', variant: 'function', action: () => setConstant(Math.E) },
     { label: '1', variant: 'number', action: () => inputDigit('1') },
     { label: '2', variant: 'number', action: () => inputDigit('2') },
     { label: '3', variant: 'number', action: () => inputDigit('3') },
@@ -235,32 +222,29 @@ function App() {
       action: evaluate,
     },
     { label: '0', variant: 'number', span: 2, action: () => inputDigit('0') },
-    { label: '00', variant: 'number', action: inputDoubleZero },
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-calc-50 via-white to-spark-100 px-4 py-6 font-sans text-panel-900">
+    <main className="min-h-screen bg-gradient-to-b from-calc-50 via-white to-spark-100 px-3 py-3 font-sans text-panel-900">
       <motion.section
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="mx-auto w-full max-w-md space-y-4 rounded-3xl bg-panel-100 p-4 shadow-lg"
+        className="mx-auto w-full max-w-md space-y-2.5 rounded-2xl bg-panel-100 p-3 shadow-lg"
       >
-        <header className="space-y-2">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-sm font-medium text-calc-600 shadow-sm">
+        <header>
+          <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-base font-medium text-calc-600 shadow-sm">
             <FlaskConical className="h-4 w-4" />
             Scientific Calculator
           </div>
-          <p className="text-base text-slate-600">Mobile-first calculator with trig, inverse trig, logs, powers, and roots.</p>
         </header>
 
         <ModeToggle mode={angleMode} onChange={setAngleMode} />
 
         <CalculatorDisplay expression={expression} value={display} />
 
-        <section className="space-y-2">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Scientific Functions</h2>
-          <div className="grid grid-cols-5 gap-2">
+        <section className="space-y-1.5">
+          <div className="grid grid-cols-5 gap-1.5">
             {scientificButtons.map((button) => (
               <CalcButton
                 key={button.label}
@@ -274,9 +258,8 @@ function App() {
           </div>
         </section>
 
-        <section className="space-y-2">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Numbers & Operators</h2>
-          <div className="grid grid-cols-5 gap-2">
+        <section className="space-y-1.5">
+          <div className="grid grid-cols-5 gap-1.5">
             {controlButtons.map((button, index) => (
               <CalcButton
                 key={`${index}-${button.ariaLabel || button.label}`}
